@@ -1,8 +1,7 @@
-const { listProductsService, findProductService } = require("../services/products");
+const { listProductsService, getProductService, searchProductService } = require("../services/products");
 
 const listProducts = async (req, res) => {
   const { pagination } = req.params;
-  console.log(pagination);
 
   const response = await listProductsService(pagination); // Envia informações da paginação para o service 
   res.send({
@@ -11,14 +10,31 @@ const listProducts = async (req, res) => {
   });
 };
 
-const findProduct = async (req, res) => {
+const getProduct = async (req, res) => {
   const { id } = req.params;
 
-  const response = await findProductService(id); // Envia informação do id do produto para o service 
+  const response = await getProductService(id); // Envia informação do id do produto para o service 
   res.send({
     status: true,
     product: response,
   });
 };
 
-module.exports = { listProducts, findProduct };
+const searchProduct = async (req, res) => {
+  const { parameter } = req.params;
+
+  const response = await searchProductService(parameter); // Envia informação do id do produto para o service
+  if (response.name === "Error") {
+    res.send({
+      status: false,
+      msg: 'Produto não encontrado',
+    });
+  } else {
+    res.send({
+      status: true,
+      product: response,
+    });
+  }
+};
+
+module.exports = { listProducts, getProduct, searchProduct };

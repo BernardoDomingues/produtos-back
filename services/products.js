@@ -27,13 +27,13 @@ const listProductsService = async (pagination) => {
   };
 };
 
-const findProductService = async (id) => {
+const getProductService = async (id) => {
   let data = {};
   await axios
-    .get(`https://pokeapi.co/api/v2/pokemon/${id}`)
+    .get(`https://pokeapi.co/api/v2/pokemon/${id}`) // Realiza Requisição de dados individuais em API externa
     .then((res) => {
       const pokemon = res.data;
-      data = {
+      data = { // Cria objeto com informações necessárias
         id: pokemon.id,
         name: pokemon.name,
         frontImage: pokemon.sprites.front_default,
@@ -49,4 +49,27 @@ const findProductService = async (id) => {
   return data;
 };
 
-module.exports = { listProductsService, findProductService };
+const searchProductService = async (parameter) => {
+  let data = {};
+  const value = parameter.toLowerCase();
+  await axios
+    .get(`https://pokeapi.co/api/v2/pokemon/${value}`) // Realiza Requisição de dados pelo valor buscado
+    .then((res) => {
+      const pokemon = res.data;
+      data = { // Cria objeto com informações necessárias
+        id: pokemon.id,
+        name: pokemon.name,
+        frontImage: pokemon.sprites.front_default,
+        backImage: pokemon.sprites.back_default,
+        types: pokemon.types,
+        height: pokemon.height / 10,
+        weight: pokemon.weight / 10,
+        stats: pokemon.stats,
+        abilities: pokemon.abilities,
+      }
+    })
+    .catch((error) => data = error);
+  return data;
+};
+
+module.exports = { listProductsService, getProductService, searchProductService };

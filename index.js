@@ -9,7 +9,7 @@ const loginValidation = require("./validations/login");
 const { version } = require("./controllers/version");
 const { register } = require("./controllers/register");
 const { login } = require("./controllers/login");
-const { listProducts, findProduct } = require("./controllers/products");
+const { listProducts, getProduct, searchProduct } = require("./controllers/products");
 
 // Configurações do app
 const PORT = 5000; // Porta
@@ -24,7 +24,8 @@ app.post("/register", registerValidation, register);
 app.post("/login", loginValidation, login);
 
 app.get("/listProducts/:pagination", listProducts);
-app.get("/findProduct/:id", findProduct);
+app.get("/getProduct/:id", getProduct);
+app.get("/searchProduct/:parameter", searchProduct);
 
 // Declaração do App
 app.listen(PORT, () => {

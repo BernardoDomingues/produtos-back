@@ -5,7 +5,7 @@
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+"
+    "url": "git+https://github.com/BernardoDomingues/produtos-back"
   },
   "author": "Bernardo Domingues",
   "license": "MIT",

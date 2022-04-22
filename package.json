@@ -24,7 +24,8 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "prod": "pm2 start index.js --name prod-api -i max --watch"
   },
   "packageManager": "yarn@3.1.0"
 }

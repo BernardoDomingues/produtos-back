@@ -11,7 +11,7 @@ const { version } = require("./controllers/version");
 const { register } = require("./controllers/register");
 const { login } = require("./controllers/login");
 const { listProducts, getProduct, searchProduct } = require("./controllers/products");
-const { createSell } = require("./controllers/sells");
+const { createSell, getUserSells } = require("./controllers/sells");
 
 // Configurações do app
 const PORT = 5000; // Porta
@@ -30,6 +30,7 @@ app.get("/getProduct/:id", getProduct);
 app.get("/searchProduct/:parameter", searchProduct);
 
 app.post("/createSell", isAuth, createSell);
+app.get("/getUserSells/:id", isAuth, getUserSells)
 
 // Declaração do App
 app.listen(PORT, () => {
